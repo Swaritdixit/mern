@@ -22,19 +22,7 @@ res.status(500).json({message:"Internal server error"})
 
     }
 };
- export async function createNote(req,res){
-    try{
-        const{title,content}=req.body
-        const newNote=new Note({title:title,content:content})
-        await newNote.save();
-        res.status(201).json({message:"Note created successfully!"})
-    }
-    catch(error){
-        console.error("Error in createNote controller:",error);
-        res.status(500).json({message:"Internal server error"})
 
-    }
-};
 export async function createNoteById(req,res){
     try{
              
