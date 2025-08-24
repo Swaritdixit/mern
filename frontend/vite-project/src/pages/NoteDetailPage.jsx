@@ -19,9 +19,9 @@ const [note, setNote] = useState({ title: "", content: "" });
     const fetchNote = async () => {
       try {
         const res = await api.get(`/notes/${id}`);
-         setNote({
-        title: res.data.title || "",
-        content: res.data.content || "",
+           setNote({
+        title: res.data[0].title,
+        content: res.data[0].content,
       });
       } catch (error) {
         console.log("Error in fetching note", error);
