@@ -20,5 +20,9 @@
   "homepage": "https://github.com/Swaritdixit/mern#readme",
   "dependencies": {
     "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.1",
+    "vite": "^7.1.3"
   }
 }
