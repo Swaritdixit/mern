@@ -2,7 +2,6 @@ import express from"express";
 const Router = express.Router();
 console.log("📌 NotesRoutes is loaded");
 
-// Then after all routes are defined
 console.log("Routes registered in notesRoutes:", Router.stack.map(r => r.route?.path || r.name));
 
 import{getAllNotes,createNote,updateNote,deleteNote} from "../controllers/nodesController.js"

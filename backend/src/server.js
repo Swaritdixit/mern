@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import rateLimiter from "./middleware/rateLimiter.js";
 import cors from "cors";
 import path from "path";
-console.log("✅ Backend starting...");
 
 dotenv.config();
 const app = express();
@@ -16,6 +15,7 @@ if(process.env.NODE_ENV!=="production")
   cors({
     origin: "http://localhost:5173",
   }));}
+console.log("✅ Backend starting...");
 
 app.use(express.json());
 app.use(rateLimiter);
