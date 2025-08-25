@@ -15,7 +15,6 @@ if(process.env.NODE_ENV!=="production")
   cors({
     origin: "http://localhost:5173",
   }));}
-console.log("✅ Backend starting...");
 
 app.use(express.json());
 app.use(rateLimiter);
@@ -25,6 +24,7 @@ app.use((req,res,next)=>{
   next();
 })
 app.use("/api/notes",notesRoutes);
+console.log("✅ Backend starting...");
 
 
 app.use(express.static(path.join(_dirname,"../frontend/dist")))
