@@ -54,6 +54,7 @@ app.get("/*", (req, res) => {
     res.status(404).send("API route not found");
   }
 });
+}
 
 
 // Connect DB and start server
