@@ -23,11 +23,11 @@ res.status(500).json({message:"Internal server error"})
     }
 };
 
-export async function createNoteById(req,res){
+export async function getNoteById(req,res){
     try{
              
-         const Note=await Note.findById(req.params.id)
-          if(!Note)
+         const note=await Note.findById(req.params.id)
+          if(!note)
           {
             return res.status(404).json({message:"Note  not found!"})
           }
