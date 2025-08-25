@@ -24,7 +24,6 @@ app.use((req,res,next)=>{
   next();
 })
 app.use("/api/notes",notesRoutes);
-console.log("✅ Backend starting...");
 
 
 app.use(express.static(path.join(_dirname,"../frontend/dist")))
@@ -32,6 +31,8 @@ if(process.env.NODE_ENV==="production"){
 app.get("*",(req,res)=>{
   res.sendFile(path.join(_dirname,"../frontend/dist/index.html"))
 });}
+console.log("✅ Backend starting...");
+
 connectDB().then(() => {
 app.listen(PORT, () => {
   console.log("server started on PORT:", PORT);
