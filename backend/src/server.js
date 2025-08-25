@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import rateLimiter from "./middleware/rateLimiter.js";
 import cors from "cors";
 import path from "path";
-import fs from "fs";
 
 dotenv.config();
 const app = express();
@@ -27,22 +26,17 @@ app.use((req,res,next)=>{
 app.use("/api/notes",notesRoutes);
 console.log("✅ Backend starting...");
 
-const frontendPath = path.join(_dirname, "../frontend/dist");
-console.log("Frontend path exists?", fs.existsSync(frontendPath));
-
-app.use(express.static(frontendPath));
-console.log("Static middleware registered");
-
-// Only after this log, register catch-all
-if (process.env.NODE_ENV === "production") {
-  console.log("Setting up catch-all");
+app.use(express.static(path.join(_dirname,"../frontend/dist")))
+if(process.env.NODE_ENV === "production"){
   app.get("*", (req, res) => {
-    console.log("Catch-all hit"); // this will never log if route registration crashes
-    res.sendFile(path.join(frontendPath, "index.html"));
+    const frontendPath = path.join(_dirname, "../frontend/dist");
+    if(!req.path.startsWith("/api")) {
+      res.sendFile(path.join(frontendPath, "index.html"));
+    } else {
+      res.status(404).send("API route not found");
+    }
   });
 }
-console.log("Catch-all route registered"); // if this never prints, the crash is before this
-
 
 
 
