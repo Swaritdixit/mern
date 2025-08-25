@@ -7,7 +7,7 @@ import cors from "cors";
 import path from "path";
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env[0].PORT || 5001;
 const _dirname=path.resolve()
 if(process.env.NODE_ENV!=="production")
 {app.use(
@@ -26,7 +26,7 @@ app.use("/api/notes",notesRoutes);
 
 
 app.use(express.static(path.join(_dirname,"../frontend/dist")))
-if(process.env.NODE_ENV==="production"){
+if(process.env[0].NODE_ENV==="production"){
 app.get("*",(req,res)=>{
   res.sendFile(path.join(_dirname,"../frontend/dist/index.html"))
 });}
