@@ -46,14 +46,15 @@ app.use(express.static(frontendPath));
 
 if (process.env.NODE_ENV === "production") {
   console.log("Setting up catch-all for non-API routes");
-  app.get("*", (req, res) => {
-    if (!req.path.startsWith("/api")) {
-      res.sendFile(path.join(frontendPath, "index.html"));
-    } else {
-      res.status(404).send("API route not found");
-    }
-  });
-}
+app.get("/*", (req, res) => {
+  const urlPath = req.url || req.path; // make sure we have a proper path
+  if (!urlPath.startsWith("/api")) {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  } else {
+    res.status(404).send("API route not found");
+  }
+});
+
 
 // Connect DB and start server
 connectDB().then(() => {
