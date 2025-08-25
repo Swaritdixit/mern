@@ -26,17 +26,22 @@ app.use((req,res,next)=>{
 app.use("/api/notes",notesRoutes);
 console.log("✅ Backend starting...");
 
-app.use(express.static(path.join(_dirname,"../frontend/dist")))
-if(process.env.NODE_ENV === "production"){
+const frontendPath = path.join(_dirname, "../frontend/dist");
+console.log("Frontend path exists?", fs.existsSync(frontendPath));
+
+app.use(express.static(frontendPath));
+console.log("Static middleware registered");
+
+// Only after this log, register catch-all
+if (process.env.NODE_ENV === "production") {
+  console.log("Setting up catch-all");
   app.get("*", (req, res) => {
-    const frontendPath = path.join(_dirname, "../frontend/dist");
-    if(!req.path.startsWith("/api")) {
-      res.sendFile(path.join(frontendPath, "index.html"));
-    } else {
-      res.status(404).send("API route not found");
-    }
+    console.log("Catch-all hit"); // this will never log if route registration crashes
+    res.sendFile(path.join(frontendPath, "index.html"));
   });
 }
+console.log("Catch-all route registered"); // if this never prints, the crash is before this
+
 
 
 
