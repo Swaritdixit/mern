@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import rateLimiter from "./middleware/rateLimiter.js";
 import cors from "cors";
 import path from "path";
+import fs from "fs";
 
 dotenv.config();
 const app = express();
