@@ -27,10 +27,17 @@ app.use("/api/notes",notesRoutes);
 console.log("✅ Backend starting...");
 
 app.use(express.static(path.join(_dirname,"../frontend/dist")))
-if(process.env.NODE_ENV==="production"){
-app.get("*",(req,res)=>{
-  res.sendFile(path.join(_dirname,"../frontend/dist/index.html"))
-});}
+if(process.env.NODE_ENV === "production"){
+  app.get("*", (req, res) => {
+    const frontendPath = path.join(_dirname, "../frontend/dist");
+    if(!req.path.startsWith("/api")) {
+      res.sendFile(path.join(frontendPath, "index.html"));
+    } else {
+      res.status(404).send("API route not found");
+    }
+  });
+}
+
 
 
 connectDB().then(() => {
