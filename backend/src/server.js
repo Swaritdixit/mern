@@ -22,7 +22,7 @@ app.use((req,res,next)=>{
   console.log(`we just got a new request${req.url}`);
   next();
 })
-app.use("/api/notes",notesRoutes);
+app.use("/notes",notesRoutes);
 
 
 app.use(express.static(path.join(_dirname,"../frontend/dist")))
