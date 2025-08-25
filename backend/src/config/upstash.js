@@ -3,8 +3,8 @@ import { Redis } from "@upstash/redis";
 import dotenv from "dotenv";
 dotenv.config();
 const redis = new Redis({
-  url: 'https://full-octopus-9040.upstash.io',
-  token: 'ASNQAAImcDEzNjExMjEzYTY1Yjc0ZmNiYTliNDQ1MzJkMmY5MWMyMHAxOTA0MA',
+  url: UPSTASH_REDIS_REST_URL,
+  token: UPSTASH_REDIS_REST_TOKEN
 })
 
 const ratelimit =new Ratelimit({
